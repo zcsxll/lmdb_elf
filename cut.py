@@ -4,7 +4,7 @@ import io
 import lmdb
 from tqdm import tqdm
 
-def cur(lmdb_path_src, lmdb_path_des, cnt):
+def cut(lmdb_path_src, lmdb_path_des, cnt):
     env_src = lmdb.open(lmdb_path_src,
             readonly=True,
             lock=False,
@@ -26,4 +26,4 @@ def cur(lmdb_path_src, lmdb_path_des, cnt):
     env_des.close()
 
 if __name__ == '__main__':
-    cur(sys.argv[1], sys.argv[2], int(sys.argv[3]))
+    cut(sys.argv[1], sys.argv[2], int(sys.argv[3]))
