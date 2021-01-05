@@ -38,7 +38,7 @@ if __name__ == '__main__':
         create(lmdb_name, files)
     elif os.path.isfile(sys.argv[1]):
         with open(sys.argv[1], 'r') as fp:
-            files = fp.read().split()
+            files = fp.read().splitlines()
         create(lmdb_name, files)
     else:
-        print('usage: %s <dir or list_file>' % sys.argv[0])
+        print(f'"{sys.argv[1]}" is not a dir of file list')
