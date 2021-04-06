@@ -19,9 +19,9 @@ def peek(lmdb_path, key):
     bio = io.BytesIO(data)
     sf = soundfile.SoundFile(bio)
     print(sf.samplerate)
-    #pcm = sf.read()
-    #print(len(pcm))
-    #soundfile.write('./test.wav', pcm, 16000)
+    pcm = sf.read()
+    print(pcm.shape)
+    soundfile.write('./peek.wav', pcm, 16000)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

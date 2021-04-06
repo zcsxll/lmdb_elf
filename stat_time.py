@@ -18,7 +18,7 @@ def get_total(lmdb_path):
 
     return n#, samples
 
-def peek(lmdb_path, count, max_key = 500):
+def peek(lmdb_path, count):
     env = lmdb.open(lmdb_path,
             readonly=True,
             lock=False,
@@ -29,6 +29,7 @@ def peek(lmdb_path, count, max_key = 500):
     tmin = 1000
     tmax = 0
     tavg = 0
+    ttotal = 0
     for key in range(count):
         data = txn.get('{}'.format(key).encode(encoding='utf-8'))
         if data is None:
@@ -38,13 +39,13 @@ def peek(lmdb_path, count, max_key = 500):
         sf = soundfile.SoundFile(bio)
         t = len(sf.read()) / 16000
         tavg += t
+        ttotal += t
         tmin = min(tmin, t)
         tmax = max(tmax, t)
         #print(sf.samplerate, len(sf.read()) / 16000)
         print(key, tmin, tmax, tavg / (key + 1))
 
-        if key > max_key:
-            break
+    print(ttotal)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
